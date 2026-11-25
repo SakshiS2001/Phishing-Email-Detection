@@ -1,5 +1,4 @@
-
-# Virtual environments
+# Python virtual environment
 venv/
 .venv/
 env/
@@ -12,19 +11,17 @@ __pycache__/
 .env
 .env.*
 
-# Database files
+# Flask instance and uploaded emails
+instance/
+uploads/
+
+# Logs and databases
+*.log
 *.db
 *.sqlite3
 
-# IDE configuration
+# IDE settings
 .vscode/
 
-# Logs
-*.log
-
-# Private email samples
+# Sensitive test samples
 samples/
-
-# Generated reports
-reports/*
-!reports/.gitkeep

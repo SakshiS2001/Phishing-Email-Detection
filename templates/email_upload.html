@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Email Analysis | PhishGuard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="container py-5">
+
+    <div class="mb-4">
+        <a href="{{ url_for('home') }}" class="text-decoration-none">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+    <div class="mb-4">
+        <h2>Email Analysis</h2>
+        <p class="text-secondary">
+            Upload an email file to begin phishing investigation.
+        </p>
+    </div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show">
+                {{ message }}
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endwith %}
+
+    <!-- Upload Card -->
+    <div class="card shadow-sm p-4">
+
+        <div class="text-center py-4">
+
+            <i class="bi bi-envelope-arrow-up display-3 text-primary"></i>
+
+            <h4 class="mt-3">Upload Email File</h4>
+
+            <p class="text-secondary">
+                Select an email file in .eml format.
+            </p>
+
+            <form method="POST"
+                  action="{{ url_for('upload_email') }}"
+                  enctype="multipart/form-data">
+
+                <input type="file"
+                       name="email_file"
+                       class="form-control mb-3"
+                       accept=".eml"
+                       required>
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-cloud-upload"></i>
+                    Upload Email
+                </button>
+
+            </form>
+
+            <small class="text-secondary d-block mt-3">
+                Maximum file size: 5 MB. Only .eml files accepted.
+            </small>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
