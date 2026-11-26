@@ -1,6 +1,7 @@
 
 from flask import Flask, render_template, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
+from modules.email_parser import parse_email
 from pathlib import Path
 import uuid
 
@@ -63,7 +64,18 @@ def upload_email():
 
         file.save(file_path)
 
-        flash("Email uploaded successfully. Ready for analysis.", "success")
+        # Parse the uploaded email
+        email_data = parse_email(file_path)
+
+        # Display extracted information in the terminal
+        print("\n========== EMAIL ANALYSIS ==========")
+
+        for key, value in email_data.items():
+            print(f"{key}: {value}")
+
+        print("====================================")
+
+        flash("Email uploaded and parsed successfully.", "success")
 
         return redirect(url_for("upload_email"))
 
